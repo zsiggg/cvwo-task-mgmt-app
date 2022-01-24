@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import Tasks from "./Tasks";
 import NewTask from "./NewTask"
 import { Modal } from "bootstrap";
