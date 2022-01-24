@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default React.forwardRef((props, ref) => {
     const [name, setName] = useState('');
-    const [deadline, setDeadline] = useState(new Date());
+    const [deadline, setDeadline] = useState(undefined);
     const setRefreshHome = props.setRefreshHome;
     const [createdTaskId, setCreatedTaskId] = useState();
     const reset = props.reset;
@@ -16,7 +16,7 @@ export default React.forwardRef((props, ref) => {
     useEffect(() => {
         if (reset) {
             setName('');
-            setDeadline(new Date());
+            setDeadline(undefined);
             setCreatedTaskId();
             setReset(false);
             setResetCategoriesComponent(true);
@@ -65,12 +65,12 @@ export default React.forwardRef((props, ref) => {
                             <form onKeyDown={(event) => { if (event.code === 'Enter') event.preventDefault(); }}>
                                 <div className="form-group">
                                     <label htmlFor="taskName">Name</label>
-                                    <input type="text" name="name" id="taskName" value={name} required autoComplete="off" onChange={event => setName(event.target.value)}/>
+                                    <input type="text" name="name" id="taskName" value={name} autoComplete="off" onChange={event => setName(event.target.value)}/>
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="taskDeadline">Deadline</label>
-                                    <DatePicker selected={deadline} name="deadline" id="taskDeadline" required onChange={setDeadline} dateFormat="dd/MM/yyyy"/>
+                                    <DatePicker selected={deadline} name="deadline" id="taskDeadline" autoComplete="off" onChange={setDeadline} dateFormat="dd/MM/yyyy"/>
                                 </div>
                             </form>
                         </div>
