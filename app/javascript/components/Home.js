@@ -49,7 +49,7 @@ export default () => {
       <NewTask ref={newTaskRef} setRefreshHome={setRefresh} reset={newTasksReset} setReset={setNewTaskReset}/>
       <Categories ref={categoriesRef} setRefreshHome={setRefresh}/>
 
-    <div className="container">
+    <div className="container pt-2">
       <div className="row mb-2">
         <div className="col-auto">
           <button type="button" className="btn btn-info" onClick={() => { setNewTaskReset(true); showModal(newTaskRef); }}><i className="bi bi-plus-lg"></i> New Task</button>
