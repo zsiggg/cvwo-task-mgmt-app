@@ -2,8 +2,8 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from './Home'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import "bootstrap"
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import "bootstrap"
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import Categories from './Categories'
 // import Category from './Category'

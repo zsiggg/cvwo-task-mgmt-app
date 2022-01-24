@@ -45,6 +45,7 @@ export default () => {
 
   return (
     <>
+    <h1>Test</h1>
     <CategoriesProvider value={context}>
       <NewTask ref={newTaskRef} setRefreshHome={setRefresh} reset={newTasksReset} setReset={setNewTaskReset}/>
       <Categories ref={categoriesRef} setRefreshHome={setRefresh}/>
