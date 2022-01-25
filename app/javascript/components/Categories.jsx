@@ -76,7 +76,7 @@ export default React.forwardRef((props,ref) => {
         <DeleteCategory ref={deleteCategoryRef} parentModalRef={ref} id={deleteCategoryId} refreshParent={() => { setRefreshCategories(true); setDeleteCategoryId(undefined); }}/> 
 
         <div className="modal fade" ref={ref} id="modal" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">Categories</h5>

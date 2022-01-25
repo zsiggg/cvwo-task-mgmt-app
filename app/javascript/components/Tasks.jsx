@@ -68,21 +68,24 @@ export default function Tasks(props) {
         }
     }, [deleteTaskId]);
 
-    const allTasks = tasks.map((task, index) => (
-        <div key={index} className="col-md-6 col-lg-4">
-            <div className="card mb-4">
-                <div className="card-body">
-                    <h4 className="card-title">{task.name}</h4>
-                    <h6 className="card-subtitle text-muted">{format(new Date(task.deadline), "MMM d")}</h6>
-                    <div className="card-body pl-0">
-                        <CategoriesForTask id={task.id} refreshCategories={refreshCategories[task.id]} setRefreshCategories={ bool => dispatch({'type': 'update', 'id': task.id, 'refresh': bool}) }/>
-                        <button type="button" className="btn btn-primary" onClick={() => setUpdateTaskId(task.id) }><i className="bi bi-pencil-square"></i></button>
-                        <button type="button" className="btn btn-danger"onClick={() => setDeleteTaskId(task.id)}><i className="bi bi-trash" /></button>
+    const allTasks = tasks.map((task, index) => {
+        const deadline = task.deadline ? <h6 className="card-subtitle text-muted ps-3">{format(new Date(task.deadline), "MMM d")}</h6> : undefined;
+        return (
+            <div key={index} className="col-md-6 col-lg-4">
+                <div className="card mb-4">
+                    <div className="card-body">
+                        <h4 className="card-title ps-3">{task.name}</h4>
+                        {deadline}
+                        <div className="card-body ps-3">
+                            <CategoriesForTask id={task.id} refreshCategories={refreshCategories[task.id]} setRefreshCategories={ bool => dispatch({'type': 'update', 'id': task.id, 'refresh': bool}) }/>
+                            <button type="button" className="btn btn-primary" onClick={() => setUpdateTaskId(task.id) }><i className="bi bi-pencil-square"></i></button>
+                            <button type="button" className="btn btn-danger"onClick={() => setDeleteTaskId(task.id)}><i className="bi bi-trash" /></button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    ));
+        )
+    });
     
 
     const noTasks = (
@@ -98,7 +101,7 @@ export default function Tasks(props) {
         <UpdateTask ref={updateTaskRef} id={updateTaskId} refreshHome={ () => { setRefresh(true); setUpdateTaskId(undefined);  } } refreshCategories={ () => dispatch({'type': 'update', 'id': updateTaskId, 'refresh': true}) }/>
         <DeleteTask ref={deleteTaskRef} id={deleteTaskId} refreshHome={ () => { setRefresh(true); setDeleteTaskId(undefined);  } } refreshCategories={ () => dispatch({'type': 'delete', 'id': deleteTaskId}) }/>
 
-        <div>
+        <div className="row">
             {tasks.length > 0 ? allTasks : noTasks}
         </div>
         </>

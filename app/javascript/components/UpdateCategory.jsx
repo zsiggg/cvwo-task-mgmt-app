@@ -59,7 +59,7 @@ export default React.forwardRef((props, ref) => {
 
     return (
         <div className="modal fade" ref={ref} id="modal" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">Update Category</h5>
@@ -67,9 +67,9 @@ export default React.forwardRef((props, ref) => {
                     </div>
                     <div className="modal-body">
                         <form onKeyDown={(event) => { if (event.code === 'Enter') event.preventDefault(); }}>
-                            <div className="form-group">
-                                <label htmlFor="taskName">Name</label>
-                                <input type="text" name="name" id="categoryName" autoComplete="off" value={name} onChange={event => setName(event.target.value)}/>
+                            <div className="form-group row">
+                                <label className="col-2" htmlFor="taskName">Name</label>
+                                <input className="col-8" type="text" name="name" id="categoryName" autoComplete="off" value={name} onChange={event => setName(event.target.value)}/>
                             </div>
                         </form>
                     </div>

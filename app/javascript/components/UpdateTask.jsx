@@ -7,11 +7,16 @@ import "react-datepicker/dist/react-datepicker.css";
 export default React.forwardRef((props, ref) => {
     const id = props.id;
     const [name, setName] = useState([]);
-    const [deadline, setDeadline] = useState(new Date());
+    const [deadline, setDeadline] = useState(undefined);
     const refreshHome = props.refreshHome;
     const [updateCategoriesForTaskBool, setUpdateCategoriesForTaskBool] = useState(false)
     const refreshCategories = props.refreshCategories;
+    const [checked, setChecked] = useState(false);
 
+    function check(checkedValue) {
+        setChecked(checkedValue);
+        checkedValue ? undefined : setDeadline(undefined);
+    }
     function onSubmit(event) {
         event.preventDefault()
         const body = {
@@ -19,9 +24,11 @@ export default React.forwardRef((props, ref) => {
             name,
             deadline
         };
+        body.deadline = deadline ? new Date(deadline.getTime() - (60000*deadline.getTimezoneOffset())) : null;
+        
         const url = `/api/tasks/update`;
 
-        if (name.length === 0 || deadline.length === 0) { return; }
+        if (name.length === 0) { return; }
 
         const token = document.querySelector('meta[name="csrf-token"]').content;
         fetch(url, {
@@ -53,8 +60,13 @@ export default React.forwardRef((props, ref) => {
                 throw new Error("Network response was not ok.");
             })
             .then(response => {
-                        setName(response.name)
-                        setDeadline(new Date(response.deadline))
+                        setName(response.name);
+                        if (response.deadline) {
+                            setDeadline(new Date(response.deadline))
+                            check(true);
+                        } else {
+                            check(false);
+                        }
             })
             .catch(() => console.log(error.message));
         }
@@ -64,7 +76,7 @@ export default React.forwardRef((props, ref) => {
     return (
         <>
         <div className="modal fade" ref={ref} id="modal" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">Update Task</h5>
@@ -74,14 +86,19 @@ export default React.forwardRef((props, ref) => {
                         <div className="container">
                             <div className="row">
                                 <form onKeyDown={(event) => { if (event.code === 'Enter') event.preventDefault(); }}>
-                                    <div className="form-group">
-                                        <label htmlFor="taskName">Name</label>
-                                        <input type="text" name="name" id="taskName" autoComplete="off" value={name} onChange={event => setName(event.target.value)}/>
+                                    <div className="form-group row mb-4">
+                                        <div className="col-1"></div>
+                                        <label className="col-2" htmlFor="taskName">Name</label>
+                                        <input className="col-8" type="text" name="name" id="taskName" value={name} autoComplete="off" onChange={event => setName(event.target.value)}/>
                                     </div>
-
-                                    <div className="form-group">
-                                        <label htmlFor="taskDeadline">Deadline</label>
-                                        <DatePicker selected={deadline} name="deadline" id="taskDeadline" onChange={setDeadline} dateFormat="dd/MM/yyyy"/>
+                                    <div className="row mb-4">
+                                        <div className="form-check form-switch col-3">
+                                            <input className="form-check-input" type="checkbox" checked={checked} onChange={(event) => check(event.target.checked)}/>
+                                            <label htmlFor="taskDeadline">Deadline</label>
+                                        </div>
+                                        <div className="form-group col-8 p-0">
+                                            <DatePicker selected={deadline} disabled={!checked} name="deadline" id="taskDeadline" autoComplete="off" onChange={setDeadline} dateFormat="dd/MM/yyyy"/>
+                                        </div>
                                     </div>
                                 </form>
                             </div>

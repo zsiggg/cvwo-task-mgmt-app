@@ -45,13 +45,28 @@ export default () => {
 
   return (
     <>
-    <h1>Test</h1>
     <CategoriesProvider value={context}>
       <NewTask ref={newTaskRef} setRefreshHome={setRefresh} reset={newTasksReset} setReset={setNewTaskReset}/>
       <Categories ref={categoriesRef} setRefreshHome={setRefresh}/>
 
     <div className="container pt-2">
-      <div className="row mb-2">
+      <nav className="navbar navbar-expand-lg navbar-light mb-3" style={ {backgroundColor: '#e3f2fd'} }>
+        <div className="container-fluid">
+          <div className="d-flex ms-3">
+            <a className="navbar-brand fs-3 me-auto" href="/">Tasks</a>
+          </div>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarToggler">
+            <div className="d-flex justify-content-end ms-auto">
+              <span className="navbar-text me-3">Username</span>
+              <button className="btn btn-outline-secondary" type="button">Sign out</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div className="row mb-4 ms-3">
         <div className="col-auto">
           <button type="button" className="btn btn-info" onClick={() => { setNewTaskReset(true); showModal(newTaskRef); }}><i className="bi bi-plus-lg"></i> New Task</button>
         </div>
