@@ -1,24 +1,26 @@
-# README
+# Tasks
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A task management app, an assignment built for NUS Computing for Voluntary Welfare Organisations (CVWO)  
 
-Things you may want to cover:
+Made by Zsigmond Poh, A0233064N
 
-* Ruby version
+Hosted at https://tasks-zsig.herokuapp.com/  
 
-* System dependencies
 
-* Configuration
 
-* Database creation
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## Examples
 
-* ...
+![Example usage](/usage.gif)
+
+## Tech Stack
+
+**Frontend:** React, Bootstrap, Bootstrap Icons
+
+**Server:** Heroku
+
+**Backend:** Ruby on Rails, Webpacker, React on Rails
+

@@ -2,5 +2,7 @@ import React from "react";
 import ReactLoading from 'react-loading';
  
 export default () => (
-    <ReactLoading type={'cylon'} color={'#e3f2fd'} height={667} width={375} />
+    <div className="container-fluid justify-content-center">
+        <ReactLoading type={'spin'} color={'#e3f2fd'} height={100} width={100} />
+    </div>
 );

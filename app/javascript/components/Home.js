@@ -1,11 +1,9 @@
-import React, { useState, useRef, Suspense, lazy } from "react";
+import React, { useState, useRef } from "react";
 import NewTask from "./NewTask"
 import { Modal } from "bootstrap";
 import Categories from "./Categories";
 import { CategoriesProvider } from "./CategoriesContext";
-import Loading from './loading'
-
-const Tasks = lazy(() => import('./Tasks'))
+import Tasks from "./Tasks";
 
 export default () => {
   const newTaskRef = useRef();
@@ -55,9 +53,7 @@ export default () => {
           <button type="button" className="btn btn-info" onClick={() => showModal(categoriesRef)}>Categories</button>
         </div>
       </div>
-      <Suspense fallback={<Loading />}>
-        <Tasks setRefresh={setRefresh} refresh={refresh}/>
-      </Suspense>
+      <Tasks setRefresh={setRefresh} refresh={refresh}/>
     </div>
     </CategoriesProvider>
     </>
