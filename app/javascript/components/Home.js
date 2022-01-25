@@ -1,30 +1,11 @@
-import React, { useState, useRef } from "react";
-import Tasks from "./Tasks";
+import React, { useState, useRef, Suspense, lazy } from "react";
 import NewTask from "./NewTask"
 import { Modal } from "bootstrap";
 import Categories from "./Categories";
 import { CategoriesProvider } from "./CategoriesContext";
+import Loading from './loading'
 
-// export default () => (
-//   <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
-//     <div className="jumbotron jumbotron-fluid bg-transparent">
-//       <div className="container secondary-color">
-//         <h1 className="display-4">Food Recipes</h1>
-//         <p className="lead">
-//           A curated list of recipes for the best homemade meal and delicacies.
-//         </p>
-//         <hr className="my-4" />
-//         <Link
-//           to="/categories"
-//           className="btn btn-lg custom-button"
-//           role="button"
-//         >
-//           View Recipes
-//         </Link>
-//       </div>
-//     </div>
-//   </div>
-// );
+const Tasks = lazy(() => import('./Tasks'))
 
 export default () => {
   const newTaskRef = useRef();
@@ -74,7 +55,9 @@ export default () => {
           <button type="button" className="btn btn-info" onClick={() => showModal(categoriesRef)}>Categories</button>
         </div>
       </div>
-      <Tasks setRefresh={setRefresh} refresh={refresh}/>
+      <Suspense fallback={<Loading />}>
+        <Tasks setRefresh={setRefresh} refresh={refresh}/>
+      </Suspense>
     </div>
     </CategoriesProvider>
     </>

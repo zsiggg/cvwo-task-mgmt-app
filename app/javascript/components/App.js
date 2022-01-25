@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Home from './Home'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import Loading from './loading'
+
+const Home = lazy(() => import('./Home'))
 // import "bootstrap"
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,7 +18,7 @@ export default () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home/>}></Route>
+        <Route path="/" element={<Suspense fallback={<Loading/>}><Home/></Suspense>}></Route>
       </Routes>
     </Router>
 )}
