@@ -4,7 +4,7 @@ A task management app, an assignment built for NUS Computing for Voluntary Welfa
 
 Made by Zsigmond Poh, A0233064N
 
-Hosted at https://tasks-zsig.herokuapp.com/  
+Hosted at https://tasks-zsig.herokuapp.com/  (Update: the application is no longer up because Heroku is no longer free 😭)
 
 
 
